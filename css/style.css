@@ -1,9 +1,9 @@
 /********** Template CSS **********/
 :root {
-    --primary: #00B074;
-    --secondary: #2B9BFF;
-    --light: #EFFDF5;
-    --dark: #2B3940;
+    --primary: #3F72AF;
+    --secondary: #112D4E;
+    --light: #F9F7F7;
+    --dark: #222831;
 }
 
 .back-to-top {
@@ -203,6 +203,9 @@
     .sp-nav{
         font-size: 60%;
     }
+}
+.sp-nav{
+    color: #112D4E;
 }
 
 .header-carousel .owl-nav {

@@ -31,7 +31,7 @@
     <link href="css/style.css" rel="stylesheet">
     <script type="text/javascript">
         document.getElementById('frmSearch').onsubmit = function() {
-            window.location = 'http://127.0.0.1:5500/index.html ' + document.getElementById('txtSearch').value;
+            window.location = 'http://127.0.0.1:5500/index.jsp ' + document.getElementById('txtSearch').value;
             return false;
         }
     </script>
@@ -50,7 +50,7 @@
 
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-            <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <a href="index.jsp" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
                 <h3 class="m-0 text-primary"><img src="img/logoNCS.webp" style="height: 24px;" alt="">&nbsp;&nbsp; <span class="sp-nav">My National Career Services</span> </h3>
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -58,26 +58,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                    <a href="about.jsp" class="nav-item nav-link">About</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="job-list.html" class="dropdown-item">Job List</a>
-                            <a href="job-detail.html" class="dropdown-item">Job Detail</a>
+                            <a href="job-list.jsp" class="dropdown-item">Job List</a>
+                            <a href="job-detail.jsp" class="dropdown-item">Job Detail</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="category.html" class="dropdown-item">Job Category</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="404.html" class="dropdown-item">404</a>
+                            <a href="category.jsp" class="dropdown-item">Job Category</a>
+                            <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
+                            <a href="404.jsp" class="dropdown-item">404</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="job-search.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
+                <a href="job-search.jsp" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
         </nav>
         <!-- Navbar End -->
@@ -87,14 +87,17 @@
             <div class="container">
                 <div class="row g-2">
                     <div class="col-md-2">
-                        <a href="login.html" class="btn btn-dark border-0 w-100" role="button">Login</a>
+                        <a href="login.jsp" class="btn btn-dark border-0 w-100" role="button">Login</a>
                     </div>
                     <div class="col-md-2">
-                        <a href="register.html" class="btn btn-dark border-0 w-100" role="button">Register</a>
+                        <a href="register.jsp" class="btn btn-dark border-0 w-100" role="button">Register</a>
                     </div>
                     <div class="col-md-2">
-                        <form action="" name="frmSearch">
-                        <input class="btn btn-light border-0 w-100" type="search" name="" id="" placeholder="Search..">
+                       <form action="" name="frmSearch">
+                       <div class="input-group mb-3">
+                        <input class="form-control" type="search" name="" id="" placeholder="Search">
+                        <button class="input-group-text" id="basic-addon2">&#128269;</button>
+                       </div>
                     </form>
                     </div>
                 </div>
@@ -112,7 +115,7 @@
                         <a class="cat-item rounded p-4" href="">
                             <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
                             <h6 class="mb-3">Job Seek</h6>
-                            <p class="mb-0">Find Domestic & International Jobs</p>
+                            <p class="mb-0">Find Domestic Jobs</p>
                         </a>
                     </div>
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">

@@ -2,6 +2,7 @@ package com.asgprojects.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.asgprojects.bean.DatabaseConnection;
 import com.asgprojects.bean.User;
@@ -17,14 +18,13 @@ public class UserDao {
                         "INSERT INTO users (uid, password, name, role, age, state, district, city, pincode, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
                     ps.setLong(1, u.getAadhar());
                     ps.setString(2, u.getPassword());
-                    System.out.println("OK TILL HERE");
                     ps.setString(3, u.getName());
-                    ps.setLong(4, u.getRole());
-                    ps.setLong(5, u.getAge());
+                    ps.setInt(4, u.getRole());
+                    ps.setInt(5, u.getAge());
                     ps.setString(6, u.getState());
                     ps.setString(7, u.getDistrict());
                     ps.setString(8, u.getCity());
-                    ps.setLong(9, u.getPincode());
+                    ps.setInt(9, u.getPincode());
                     ps.setString(10, u.getGender());
                     status = ps.executeUpdate();
                 }
@@ -36,4 +36,28 @@ public class UserDao {
         }
         return status;
     }
+    
+    public static User getRecordById(long uid){  
+        User u=null;  
+        try{  
+            Connection con= DatabaseConnection.getConnection();
+            PreparedStatement ps=con.prepareStatement("select * from users where uid=?");  
+            ps.setLong(1,uid);  
+            ResultSet rs=ps.executeQuery();  
+            while(rs.next()){  
+                u=new User();  
+                u.setAadhar(rs.getLong("uid"));  
+                u.setName(rs.getString("name"));  
+                u.setPassword(rs.getString("password"));  
+                u.setRole(rs.getInt("role"));  
+                u.setAge(rs.getInt("age"));
+                u.setGender(rs.getString("gender"));
+                u.setState(rs.getString("state"));
+                u.setDistrict(rs.getString("district"));
+                u.setCity(rs.getString("city"));
+                u.setPincode(rs.getInt("pincode"));
+            }  
+        }catch(Exception e){System.out.println(e);}  
+        return u;  
+    }  
 }

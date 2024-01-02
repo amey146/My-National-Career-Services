@@ -115,30 +115,32 @@
 									<label class="form-check-label" for=role>Register as</label>
 									<div class="form-check">
 										<input class="form-check-input" type="radio" name="role"
-											id="emp" value="1" > <label
-											class="form-check-label" for="Employer">Employer</label>
+											id="emp" value="1"> <label class="form-check-label"
+											for="Employer">Employer</label>
 									</div>
 									<div class="form-check">
 										<input class="form-check-input" type="radio" name="role"
-											id="job" value="2"> <label
-											class="form-check-label" for="Jobseeker">Jobseeker</label>
+											id="job" value="2"> <label class="form-check-label"
+											for="Jobseeker">Jobseeker</label>
 									</div>
 								</div>
 								<br>
 								<div class="form-group">
 									<label for="name">Full Name:</label> <input type="text"
-										class="form-control" name="name" placeholder="Fisrt Middle Last">
+										class="form-control" name="name"
+										placeholder="Fisrt Middle Last">
 								</div>
 								<br>
 								<div class="form-group">
 									<label for="age">Age (years):</label> <input type="number"
 										class="form-control" id="age" min="18" max="80"
-										placeholder="18 - 80" name="age"> 
+										placeholder="18 - 80" name="age">
 								</div>
 								<br>
 								<div class="form-group">
 									<label for="gender">Select Gender:</label> <select
-										class="form-select" aria-label="Default select example" name="gender">
+										class="form-select" aria-label="Default select example"
+										name="gender">
 										<option value="Male">Male</option>
 										<option value="Female">Female</option>
 									</select>
@@ -146,7 +148,8 @@
 								<br>
 								<div class="form-group">
 									<label for="state">Select State:</label> <select
-										class="form-select" aria-label="Default select example" name="state">
+										class="form-select" aria-label="Default select example"
+										name="state">
 										<option value="AndhraPradesh">Andhra Pradesh</option>
 										<option value="ArunachalPradesh">Arunachal Pradesh</option>
 										<option value="Assam">Assam</option>
@@ -195,7 +198,8 @@
 								<br>
 								<div class="form-group">
 									<label for="district">City:</label> <input type="text"
-										class="form-control" id="city" placeholder="Enter your city" name="city">
+										class="form-control" id="city" placeholder="Enter your city"
+										name="city">
 								</div>
 								<br>
 								<div class="form-group">
@@ -212,7 +216,7 @@
 								<br>
 								<div class="form-group">
 									<label for="password">Create Password:</label> <input
-										type="password" class="form-control" id="password" 
+										type="password" class="form-control" id="password"
 										placeholder="Enter your password" name="password"> <small
 										id="passwordHelp" class="form-text text-muted"> Create
 										a strong password with a minimum of 8 characters. </small>
@@ -223,8 +227,8 @@
 										placeholder="Enter your password">
 								</div>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">
-									<button type="button" class="btn btn-outline-warning btn-lg">Old
-										User? Login</button>
+									<a href="login.jsp" class="btn btn-outline-warning btn-lg"
+										role="button">Old User? Login</a>
 									<button type="submit" class="btn btn-primary btn-lg">Register</button>
 								</div>
 							</form>

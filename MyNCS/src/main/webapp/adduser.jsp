@@ -10,9 +10,10 @@
 int i = UserDao.save(u);
 PrintWriter pw = response.getWriter();
 if (i > 0) {
-	pw.println("Success");
+	//pw.println("<h1>Success</h1><br><p>Please wait redirecting...<p>");
+	response.sendRedirect("job-search.jsp");
 } else {
-	String s = "Error"+i;
+	String s = "Error";
 	pw.println(s);
 }
 %>

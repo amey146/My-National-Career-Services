@@ -2,20 +2,13 @@
 <%@page import="com.asgprojects.dao.*, com.asgprojects.bean.*"%>
 
 <%
-String id = request.getParameter("uid");
-String pas = request.getParameter("password");
-User u = null;
-if(id == null){
-	//User is not logged in, redirect to a login page or display an error message
-    response.sendRedirect("login.jsp"); 
+if(session.getAttribute("loggedInUser")==null){
+	response.sendRedirect("login.jsp");
 }
-else{
-	u = UserDao.getRecordById(Long.parseLong(id));	
-}
-if (u != null && u.getPassword().equals(pas)) {
-    // User is logged in, proceed with the rest of your page content
+
+   
 %>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -367,8 +360,6 @@ if (u != null && u.getPassword().equals(pas)) {
 </body>
 
 </html>
-<%
-}
-%>
+
 
 

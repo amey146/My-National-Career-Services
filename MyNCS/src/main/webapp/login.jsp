@@ -110,7 +110,7 @@
 					<div class="card">
 						<div class="card-header">Login</div>
 						<div class="card-body">
-							<form action="loginuser.jsp" method="post">
+							<form action="Login" method="post">
 								<div class="form-group">
 									<label for="username">Username:</label> <input type="text"
 										class="form-control" id="username"

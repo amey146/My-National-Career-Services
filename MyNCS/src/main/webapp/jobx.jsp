@@ -89,60 +89,75 @@
         <!-- Header End -->
 
         <!-- Form Starts -->
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            Register
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="col-sm-10">
-                                    <label class="form-check-label" for="allIndia">Register as</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="location" id="allIndia"
-                                            onclick="toggleDropdown(false)">
-                                        <label class="form-check-label" for="Employer">Employer</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="location" id="allIndia"
-                                            onclick="toggleDropdown(false)">
-                                        <label class="form-check-label" for="Jobseeker">Jobseeker</label>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <label for="username">Aadhar UID:</label>
-                                    <input type="text" class="form-control" id="username"
-                                        placeholder="Enter your username">
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <label for="password">Create Password:</label>
-                                    <input type="password" class="form-control" id="password"
-                                        placeholder="Enter your password">
-                                        <small id="passwordHelp" class="form-text text-muted">
-                                            Create a strong password with a minimum of 8 characters.
-                                        </small>
-                                </div> 
-                                <div class="form-group">
-                                    <label for="password">Confirm Password:</label>
-                                    <input type="password" class="form-control" id="password"
-                                        placeholder="Enter your password">
-                                </div>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">
-                                    <button type="button" class="btn btn-outline-warning btn-lg">Old User?
-                                        Login</button>
-                                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="container mt-4">
+        <h2 class="mb-4">Job Posting Form</h2>
 
+        <form action="AddJob" method="POST">
+
+            <div class="mb-3">
+                <label for="job_id" class="form-label">Job ID:</label>
+                <input type="text" disabled="disabled" id="job_id" name="job_id" class="form-control" placeholder="AUTO" value="">
+            </div>
+
+            <div class="mb-3">
+                <label for="job_title" class="form-label">Job Title:</label>
+                <input type="text" id="job_title" name="job_title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="job_desc" class="form-label">Job Description:</label>
+                <textarea id="job_desc" name="job_desc" class="form-control" rows="4" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="job_country" class="form-label">Country:</label>
+                <input type="text" id="job_country" name="job_country" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="job_state" class="form-label">State:</label>
+                <input type="text" id="job_state" name="job_state" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="job_district" class="form-label">District:</label>
+                <input type="text" id="job_district" name="job_district" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label for="job_city" class="form-label">City:</label>
+                <input type="text" id="job_city" name="job_city" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="job_salary" class="form-label">Salary:</label>
+                <input type="text" id="job_salary" name="job_salary" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="job_exp" class="form-label">Experience Required:</label>
+                <input type="text" id="job_exp" name="job_exp" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="job_org" class="form-label">Organization:</label>
+                <input type="text" id="job_org" name="job_org" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="job_sector" class="form-label">Sector:</label>
+                <input type="text" id="job_sector" name="job_sector" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="job_function" class="form-label">Function:</label>
+                <input type="text" id="job_function" name="job_function" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>	
         <!-- Form Ends -->
 
 

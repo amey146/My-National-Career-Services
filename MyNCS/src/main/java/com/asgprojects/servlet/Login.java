@@ -20,7 +20,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String userId = request.getParameter("uid");
         String password = request.getParameter("password");
-
+        
         User user = UserDao.getRecordById(Long.parseLong(userId));
 
         if (user != null && user.getPassword().equals(password)) {

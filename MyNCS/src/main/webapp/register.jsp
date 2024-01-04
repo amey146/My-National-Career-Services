@@ -110,7 +110,7 @@
 					<div class="card">
 						<div class="card-header">Register</div>
 						<div class="card-body">
-							<form action="adduser.jsp" method="post">
+							<form action="Register" method="post">
 								<div class="col-sm-10">
 									<label class="form-check-label" for=role>Register as</label>
 									<div class="form-check">
@@ -223,7 +223,7 @@
 								</div>
 								<div class="form-group">
 									<label for="password">Confirm Password:</label> <input
-										type="password" class="form-control" id="password"
+										type="password" class="form-control" id="password2"
 										placeholder="Enter your password">
 								</div>
 								<div class="d-grid gap-2 d-md-flex justify-content-md-end py-2">

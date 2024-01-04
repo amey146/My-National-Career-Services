@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.asgprojects.bean.User;
 import com.asgprojects.dao.UserDao;
 
-@WebServlet("/Login")
+//@WebServlet("/Login")
 public class Login extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

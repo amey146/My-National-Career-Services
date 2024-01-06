@@ -104,14 +104,14 @@ if(session.getAttribute("loggedInUser")==null){
 
         <!-- Form Starts -->
 
-        <form action="" class="p-5">
+        <form action="JobSearch" class="p-5">
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="keywords">Keywords</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" name="" id=""
-                        placeholder="ex: Java; Data Entry; Accounts; Sales etc">
+                    <input class="form-control" type="text" name="keywords" id=""
+                        placeholder="ex: Java;Data Entry;Accounts;Sales etc">
                     <p class="form-text">
-                        Use ; to search for multiple keywords
+                        Use ; (no-space) to search for multiple keywords
                     </p>
                 </div>
             </div>
@@ -125,15 +125,14 @@ if(session.getAttribute("loggedInUser")==null){
                         <label class="form-check-label" for="allIndia">All India</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="location" id="selectLocation"
+                        <input class="form-check-input" type="radio" name="location" value="states" id="selectLocation"
                             onclick="toggleDropdown(true)">
                         <label class="form-check-label" for="selectLocation">Select Location</label>
-
                     </div>
                     <!-- Chainselect -->
                     <div id="cityDropdown">
                         <label class="form-label" for="cities">Choose a state:</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="state">
                             <option value="AndhraPradesh">Andhra Pradesh</option>
                             <option value="ArunachalPradesh">Arunachal Pradesh</option>
                             <option value="Assam">Assam</option>
@@ -212,12 +211,12 @@ if(session.getAttribute("loggedInUser")==null){
                     <option value="9">Transportation and Storage</option>
                     <option value="6">Water Supply, Sewerage and Waste Management</option>
                     <option value="8">Wholesale and Retail</option>
-                </select>
-                <p class="form-text">
-                    Use CRTL + mouse click to multi-select options
-                </p>
-                </div>
-            </div>
+	                </select>
+	                <p class="form-text">
+	                    Use CRTL + mouse click to multi-select options
+	                </p>
+	                </div>
+	            </div>
 
 
 

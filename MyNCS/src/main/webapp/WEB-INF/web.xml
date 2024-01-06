@@ -36,6 +36,24 @@
 		<url-pattern>/Logout</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>PostJobServlet</servlet-name>
+		<servlet-class>com.asgprojects.servlet.PostJob</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostJobServlet</servlet-name>
+		<url-pattern>/PostJob</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>JobSearchServlet</servlet-name>
+		<servlet-class>com.asgprojects.servlet.JobSearch</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JobSearchServlet</servlet-name>
+		<url-pattern>/JobSearch</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Custom error page for 404 (Not Found) -->
     <error-page>
         <error-code>404</error-code>

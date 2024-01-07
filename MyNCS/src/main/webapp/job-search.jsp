@@ -177,7 +177,7 @@ if(session.getAttribute("loggedInUser")==null){
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="org">Organisation Type</label>
                 <div class="col-sm-10">
-                    <select name="" id="org" class="form-select" aria-label="Default select example">
+                    <select name="job_org" id="org" class="form-select" aria-label="Default select example">
                         <option value="all">All Jobs</option>
                         <option value="private">Private Sector</option>
                         <option value="government">Government Sector</option>

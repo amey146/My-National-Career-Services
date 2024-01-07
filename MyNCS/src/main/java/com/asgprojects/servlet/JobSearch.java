@@ -16,56 +16,64 @@ public class JobSearch extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String org = request.getParameter("job_org");
+		StringBuffer spacer = new StringBuffer();
+		String query = "";
+
+		// For location (applied to both queries)
+		String location = request.getParameter("location");
+		if ("states".equals(location)) {
+			String state = request.getParameter("state");
+			spacer.append(" WHERE jobState = '" + state + "'");
+		}
+
 		// For Keywords
 		// -----------------------------------------------------------------
 		String[] keywords = request.getParameter("keywords").split(";");
+		String keyword = null;
 		StringBuilder keywordClause = new StringBuilder("(");
 		for (int i = 0; i < keywords.length; i++) {
-			String keyword = keywords[i].trim();
-			keywordClause.append("keywords LIKE '%").append(keyword).append("%'");
+			keyword = keywords[i].trim();
+			keywordClause.append("jobTitle LIKE '%").append(keyword).append("%'");
 			if (i < keywords.length - 1) {
 				keywordClause.append(" OR ");
 			}
 		}
-		keywordClause.append(")");
-		String finalQuery = "SELECT * FROM jobs_table WHERE " + keywordClause.toString();
+		if (!(keyword.equals(""))) {
+			keywordClause.append(")");
+			spacer.append(" AND " + keywordClause.toString());
+		}
 
-		// For location
-		// -----------------------------------------------------------------
-		String location = request.getParameter("location");
-		System.out.println(location);
-		if ("states".equals(location)) {
-			String state = request.getParameter("state");
-			keywordClause.append(" AND location = " + "'" + state + "'");
+		// For sectors
+		String[] selectedSectors = request.getParameterValues("sector");
+		if (selectedSectors != null) {
+			spacer.append(" AND jobSector IN (" + String.join(",", selectedSectors) + ")");
+		}
+		// For functional
+		String functionalarea = request.getParameter("functionalarea");
+		if (functionalarea != null) {
+			spacer.append(" AND jobFunction = " + functionalarea);
+		}
+		// For experience
+		String experience = request.getParameter("exp");
+		if (experience != null) {
+			spacer.append(" AND jobExp <= " + experience);
+		}
+
+		// For org
+		if (org.equals("private")) {
+			query = "SELECT * FROM PRIV_JOBS" + spacer;
+		} else if (org.equals("government")) {
+			query = "SELECT * FROM GOV_JOBS" + spacer;
 		} else {
-			// Do Nothing
+			// Use a subquery to apply the location condition to both UNION queries
+			query = "SELECT * FROM (SELECT * FROM PRIV_JOBS" + spacer + " UNION SELECT * FROM GOV_JOBS" + spacer
+					+ ") AS combined_jobs";
 		}
+		// Print the final query
 
-		// For District
-		// -----------------------------------------------------------------
-		String district = request.getParameter("district");
+		System.out.println(query);
 
-		if (district != null) {
-			keywordClause.append(" AND district = " + "'" + district + "'");
-		}
-
-		// For City
-		// -----------------------------------------------------------------
-		String city = request.getParameter("city");
-
-		if (district != null) {
-			keywordClause.append(" AND city = " + "'" + city + "'");
-		}
-		finalQuery = "SELECT * FROM jobs_table WHERE " + keywordClause.toString();
-		System.out.println(finalQuery);
 	}
 
 }
-
-/*
- * ...{ SELECT * FROM jobs_table WHERE (location = 'allIndia' OR location =
- * 'selectedState') AND organisation_type = 'selectedOrgType' AND sector IN
- * (selectedSector1, selectedSector2, ...) AND functional_area =
- * 'selectedFunctionalArea' AND experience = 'selectedExperience' }
- * 
- */

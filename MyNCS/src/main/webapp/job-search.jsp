@@ -121,7 +121,7 @@ if(session.getAttribute("loggedInUser")==null){
                 <div class="col-sm-10">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="location" id="allIndia"
-                            onclick="toggleDropdown(false)">
+                            onclick="toggleDropdown(false)" checked="checked">
                         <label class="form-check-label" for="allIndia">All India</label>
                     </div>
                     <div class="form-check">
@@ -226,6 +226,7 @@ if(session.getAttribute("loggedInUser")==null){
                 Area</label>
                 <div class="col-sm-10">
                     <select name="functionalarea" class="form-select" aria-label="Default select example">
+                    <option selected="selected" value="all">Select a functional area</option>
                         <option value="4">Administration/Back Office Activities</option>
                         <option value="9">Analytics &amp; Business Intelligence</option>
                         <option value="8">Customer Care Service</option>

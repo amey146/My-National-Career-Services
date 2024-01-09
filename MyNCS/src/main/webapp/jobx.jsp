@@ -162,7 +162,7 @@
 					</div>
 					<!-- Chainselect -->
 					<div id="cityDropdown">
-						<label class="form-label" for="cities">Choose a state:</label> <select
+						<label class="form-label" for="state">Choose a state:</label> <select name="job_state"
 							class="form-select" aria-label="Default select example">
 							<option value="AndhraPradesh">Andhra Pradesh</option>
 							<option value="ArunachalPradesh">Arunachal Pradesh</option>
@@ -269,6 +269,7 @@
 					<label for="job_function" class="form-label">Function:</label> <select
 						id="job_function" name="job_function" class="form-select"
 						aria-label="Default select example">
+						<option selected="selected" value="all">Select a functional area</option>
 						<option value="4">Administration/Back Office Activities</option>
 						<option value="9">Analytics &amp; Business Intelligence</option>
 						<option value="8">Customer Care Service</option>

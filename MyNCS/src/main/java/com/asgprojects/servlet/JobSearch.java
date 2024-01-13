@@ -92,16 +92,16 @@ public class JobSearch extends HttpServlet {
 
 		// For org
 		if (org.equals("private")) {
-			query = "SELECT jobTitle, FROM PRIV_JOBS" + spacer +";";
+			query = "SELECT jobTitle, jobCity job FROM PRIV_JOBS" + spacer +";";
 		} else if (org.equals("government")) {
-			query = "SELECT jobTitle, FROM GOV_JOBS" + spacer +";";
+			query = "SELECT jobTitle, jobCity FROM GOV_JOBS" + spacer +";";
 		} else {
 			// Use a subquery to apply the location condition to both UNION queries
-			query = "SELECT jobTitle, FROM (SELECT jobTitle FROM PRIV_JOBS" + spacer
-					+ " UNION SELECT jobTitle FROM GOV_JOBS" + spacer + ") AS combined_jobs;";
+			query = "SELECT jobTitle, jobCity FROM (SELECT jobTitle, jobCity FROM PRIV_JOBS" + spacer
+					+ " UNION SELECT jobTitle, jobCity FROM GOV_JOBS" + spacer + ") AS combined_jobs;";
 		}
 		// Print the final query
-		//System.out.println(query);
+		System.out.println(query);
 		
 		
 		// ... (Database connection and query execution)
@@ -117,12 +117,11 @@ public class JobSearch extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<html><body>");
 			out.println("<table>");
-			out.println("<tr><th>Column 1</th><th>Column 2</th>...</tr>");
+			out.println("<tr><h1><th>Title</th><th>City</th></h1></tr>");
 			while (results.next()) {
 			    out.println("<tr>");
-			    out.println("<td>" + results.getString("jobTitle") + "</td>");
-			    //out.println("<td>" + results.getInt("column2") + "</td>");
-			    // ... (Other columns)
+			    out.println("<td><h1>" + results.getString("jobTitle") + "</h1></td>");
+			    out.println("<td><h1>" + results.getString("jobCity") + "</h1></td>");
 			    out.println("</tr>");
 			}
 			out.println("</table>");

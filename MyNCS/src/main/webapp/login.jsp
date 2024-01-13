@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>JobEntry - Job Portal Website Template</title>
+<title>My NCS</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -39,7 +39,18 @@
 
 <!-- Page Specific -->
 
-
+<style>
+#empid {
+	display: none;
+}
+</style>
+<script>
+	function toggleDropdown(showDropdown) {
+		var dropdown = document.getElementById("empid");
+		dropdown.style.display = showDropdown ? "block" : "none";
+		dropdown = document.getElementById("inputid");
+		dropdown.required = true;
+	}
 </script>
 </head>
 
@@ -111,6 +122,24 @@
 						<div class="card-header">Login</div>
 						<div class="card-body">
 							<form action="Login" method="post">
+								<div class="col-sm-10"></div>
+								<label class="form-check-label" for=role>Login as</label>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="role"
+										id="emp" value="1" onclick="toggleDropdown(true)" > <label
+										class="form-check-label" for="Employer">Employer</label>
+
+								</div>
+								<!-- Chainselect -->
+								<div id="empid">
+									<label class="form-label" for="emp">Enter Employee ID</label> <input
+										class="form-input" name="emps" id="inputid">
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio"
+										required="required" name="role" id="job" value="2"> <label
+										class="form-check-label" for="Jobseeker">Jobseeker</label>
+								</div>
 								<div class="form-group">
 									<label for="username">Username:</label> <input type="text"
 										class="form-control" id="username"

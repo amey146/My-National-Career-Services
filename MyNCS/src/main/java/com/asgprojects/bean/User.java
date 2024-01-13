@@ -9,7 +9,14 @@ public class User {
 	String state, district, city;
 	int pincode;
 	String gender;
+	String empIdForSUser;
 	
+	public String getEmpIdForSUser() {
+		return empIdForSUser;
+	}
+	public void setEmpIdForSUser(String empIdForSUser) {
+		this.empIdForSUser = empIdForSUser;
+	}
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import com.asgprojects.bean.DatabaseConnection;
 import com.asgprojects.bean.Job;
 
-public class PrivJob implements JobDao {
+public class JobPriv implements Job_Dao {
 
-	public PrivJob() {
+	public JobPriv() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,6 +31,9 @@ public class PrivJob implements JobDao {
 					ps.setString(9, j.getJobFunction()); // Change to getJobFunction()
 					ps.setInt(10, j.getJobExp()); // Change to getJobExp()
 					status = ps.executeUpdate();
+					
+					ps.close();
+					con.close();
 				}
 			} else {
 				System.out.println("Error: Unable to establish a database connection");

@@ -2,7 +2,7 @@ package com.asgprojects.dao;
 
 import com.asgprojects.bean.Job;
 
-public interface JobDao {
+public interface Job_Dao {
 	public static int save(Job j) {
 		return 0;
 	}

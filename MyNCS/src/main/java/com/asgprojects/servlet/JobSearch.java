@@ -1,11 +1,17 @@
 package com.asgprojects.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.asgprojects.bean.DatabaseConnection;
 
 /**
  * Servlet implementation class JobSearch
@@ -86,17 +92,51 @@ public class JobSearch extends HttpServlet {
 
 		// For org
 		if (org.equals("private")) {
-			query = "SELECT jobTitle FROM PRIV_JOBS" + spacer +";";
+			query = "SELECT jobTitle, FROM PRIV_JOBS" + spacer +";";
 		} else if (org.equals("government")) {
-			query = "SELECT jobTitle FROM GOV_JOBS" + spacer +";";
+			query = "SELECT jobTitle, FROM GOV_JOBS" + spacer +";";
 		} else {
 			// Use a subquery to apply the location condition to both UNION queries
-			query = "SELECT jobTitle FROM (SELECT jobTitle FROM PRIV_JOBS" + spacer
+			query = "SELECT jobTitle, FROM (SELECT jobTitle FROM PRIV_JOBS" + spacer
 					+ " UNION SELECT jobTitle FROM GOV_JOBS" + spacer + ") AS combined_jobs;";
 		}
 		// Print the final query
-		System.out.println(query);
-
+		//System.out.println(query);
+		
+		
+		// ... (Database connection and query execution)
+		Connection con = null;
+		PreparedStatement statement = null;
+		ResultSet results = null;
+		try {
+			
+			con = DatabaseConnection.getConnection();
+			statement = con.prepareStatement(query);
+			results = statement.executeQuery();
+			
+			PrintWriter out = response.getWriter();
+			out.println("<html><body>");
+			out.println("<table>");
+			out.println("<tr><th>Column 1</th><th>Column 2</th>...</tr>");
+			while (results.next()) {
+			    out.println("<tr>");
+			    out.println("<td>" + results.getString("jobTitle") + "</td>");
+			    //out.println("<td>" + results.getInt("column2") + "</td>");
+			    // ... (Other columns)
+			    out.println("</tr>");
+			}
+			out.println("</table>");
+			out.println("</body></html>");
+			
+			results.close();
+			statement.close();
+			con.close();
+		}
+		catch (Exception e) {
+			System.err.println(e);
+		}
+		
+		
 	}
 
 }

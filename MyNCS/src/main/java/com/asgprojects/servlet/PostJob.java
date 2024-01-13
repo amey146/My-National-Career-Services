@@ -4,17 +4,14 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.asgprojects.bean.Job;
-import com.asgprojects.bean.User;
-import com.asgprojects.dao.GovJob;
-import com.asgprojects.dao.JobDao;
-import com.asgprojects.dao.PrivJob;
-import com.asgprojects.dao.UserDao;
+import com.asgprojects.dao.JobGov;
+import com.asgprojects.dao.Job_Dao;
+import com.asgprojects.dao.JobPriv;
 
 //@WebServlet("/PostJob")
 public class PostJob extends HttpServlet {
@@ -24,7 +21,7 @@ public class PostJob extends HttpServlet {
     );
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String org = request.getParameter("job_org");
-		JobDao jd;
+		Job_Dao jd; //Used to save object
 		int status = 0;
 		String[] selectedValues = request.getParameterValues("job_sector");
 		String combinedValues = String.join(",", selectedValues);
@@ -40,15 +37,14 @@ public class PostJob extends HttpServlet {
 				combinedValues, //sector 
 				request.getParameter("job_function"));
 		if(org.equals("gov_jobs")) {
-			jd = new GovJob();
-			status = GovJob.save(j);
+			jd = new JobGov();
+			status = JobGov.save(j);
 		}
 		else if (org.equals("priv_jobs")) {
-			jd = new PrivJob();
-			status = PrivJob.save(j);
+			jd = new JobPriv();
+			status = JobPriv.save(j);
 		}
 		if (status > 0) {
-			System.out.println("<h1>Success</h1><br><p>Please wait redirecting...<p>");
 			response.sendRedirect("job-search.jsp");
 		} else {
 			response.sendRedirect("error.jsp");

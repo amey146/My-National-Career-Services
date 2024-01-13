@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import com.asgprojects.bean.DatabaseConnection;
 import com.asgprojects.bean.Job;
 
-public class GovJob implements JobDao {
+public class JobGov implements Job_Dao {
 
-	public GovJob() {
+	public JobGov() {
 
 	}
 
@@ -31,6 +31,9 @@ public class GovJob implements JobDao {
 					ps.setString(9, j.getJobFunction()); // Change to getJobFunction()
 					ps.setInt(10, j.getJobExp()); // Change to getJobExp()
 					status = ps.executeUpdate();
+					
+					ps.close();
+					con.close();
 				}
 			} else {
 				System.out.println("Error: Unable to establish a database connection");

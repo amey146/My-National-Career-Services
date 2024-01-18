@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.asgprojects.bean.DatabaseConnection;
+import com.asgprojects.bean.Job;
 
 /**
  * Servlet implementation class JobSearch
@@ -92,50 +95,48 @@ public class JobSearch extends HttpServlet {
 
 		// For org
 		if (org.equals("private")) {
-			query = "SELECT jobTitle, jobCity job FROM PRIV_JOBS" + spacer +";";
+			query = "SELECT * job FROM PRIV_JOBS" + spacer + ";";
 		} else if (org.equals("government")) {
-			query = "SELECT jobTitle, jobCity FROM GOV_JOBS" + spacer +";";
+			query = "SELECT jobTitle, jobCity FROM GOV_JOBS" + spacer + ";";
 		} else {
 			// Use a subquery to apply the location condition to both UNION queries
-			query = "SELECT jobTitle, jobCity FROM (SELECT jobTitle, jobCity FROM PRIV_JOBS" + spacer
-					+ " UNION SELECT jobTitle, jobCity FROM GOV_JOBS" + spacer + ") AS combined_jobs;";
+			query = "SELECT * FROM (SELECT * FROM PRIV_JOBS" + spacer + " UNION SELECT * FROM GOV_JOBS" + spacer
+					+ ") AS combined_jobs;";
 		}
 		// Print the final query
 		System.out.println(query);
-		
-		
+		request.setAttribute("searchQuery", query);
+		request.getRequestDispatcher("job-list.jsp").forward(request, response);
+
 		// ... (Database connection and query execution)
 		Connection con = null;
 		PreparedStatement statement = null;
 		ResultSet results = null;
 		try {
-			
+
 			con = DatabaseConnection.getConnection();
 			statement = con.prepareStatement(query);
 			results = statement.executeQuery();
-			
+
 			PrintWriter out = response.getWriter();
-			out.println("<html><body>");
-			out.println("<table>");
-			out.println("<tr><h1><th>Title</th><th>City</th></h1></tr>");
+			out.println("<html><head>");
+			out.println("<link href='css/displayjobstyle.css' rel='stylesheet'>");
+
+			List<Job> searchResults = new ArrayList<>();
 			while (results.next()) {
-			    out.println("<tr>");
-			    out.println("<td><h1>" + results.getString("jobTitle") + "</h1></td>");
-			    out.println("<td><h1>" + results.getString("jobCity") + "</h1></td>");
-			    out.println("</tr>");
+				searchResults.add(new Job(results.getInt("jobId"), results.getInt("jobSalary"),
+						results.getInt("jobExp"), results.getString("jobTitle"), results.getString("jobDesc"),
+						results.getString("jobState"), results.getString("jobDistrict"), results.getString("jobCity"),
+						results.getString("jobSector"), results.getString("jobFunction")));
 			}
-			out.println("</table>");
-			out.println("</body></html>");
-			
+
 			results.close();
 			statement.close();
 			con.close();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println(e);
 		}
-		
-		
+
 	}
 
 }

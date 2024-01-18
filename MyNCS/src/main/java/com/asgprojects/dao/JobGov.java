@@ -2,6 +2,9 @@ package com.asgprojects.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.asgprojects.bean.DatabaseConnection;
 import com.asgprojects.bean.Job;
@@ -11,7 +14,7 @@ public class JobGov implements Job_Dao {
 	public JobGov() {
 
 	}
-
+	
 	public static int save(Job j) {
 		int status = 0;
 		try {
@@ -43,5 +46,33 @@ public class JobGov implements Job_Dao {
 		}
 		return status;
 	}
+	
+	public static List<Job> getAllRecords(){  
+	    List<Job> list=new ArrayList<Job>();  
+	      
+	    try{  
+	        Connection con= DatabaseConnection.getConnection();  
+	        PreparedStatement ps=con.prepareStatement("select * from register");  
+	        ResultSet rs=ps.executeQuery();  
+	        while(rs.next()){  
+	        	Job j=new Job();  
+	        	
+	        	// Assuming these methods exist in your Job class
+	        	j.setJobId(rs.getInt("jobId"));
+	        	j.setJobTitle(rs.getString("jobTitle"));
+	        	j.setJobDesc(rs.getString("jobDesc"));
+	        	j.setJobSalary(rs.getInt("jobSalary")); // Assuming jobSalary is an int, adjust accordingly
+	        	j.setJobState(rs.getString("jobState"));
+	        	j.setJobDistrict(rs.getString("jobDistrict"));
+	        	j.setJobCity(rs.getString("jobCity"));
+	        	j.setJobSector(rs.getString("jobSector"));
+	        	j.setJobFunction(rs.getString("jobFunction"));
+	        	j.setJobExp(rs.getInt("jobExp")); 
+	           
+	            list.add(j);  
+	        }  
+	    }catch(Exception e){System.out.println(e);}  
+	    return list;  
+	}  
 
 }

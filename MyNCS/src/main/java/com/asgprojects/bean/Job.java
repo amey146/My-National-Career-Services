@@ -2,6 +2,8 @@ package com.asgprojects.bean;
 
 public class Job {
 
+	
+
 	public Job(int jobId, int jobSalary, int jobExp, String jobTitle, String jobDesc, String jobState,
 			String jobDistrict, String jobCity, String jobSector, String jobFunction) {
 		super();

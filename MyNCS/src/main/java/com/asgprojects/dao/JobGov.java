@@ -52,7 +52,7 @@ public class JobGov implements Job_Dao {
 	      
 	    try{  
 	        Connection con= DatabaseConnection.getConnection();  
-	        PreparedStatement ps=con.prepareStatement("select * from register");  
+	        PreparedStatement ps=con.prepareStatement("select * from gov_jobs");  
 	        ResultSet rs=ps.executeQuery();  
 	        while(rs.next()){  
 	        	Job j=new Job();  

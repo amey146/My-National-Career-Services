@@ -49,7 +49,7 @@
 		var dropdown = document.getElementById("empid");
 		dropdown.style.display = showDropdown ? "block" : "none";
 		dropdown = document.getElementById("inputid");
-		dropdown.required = true;
+		dropdown.required = showDropdown;
 	}
 </script>
 </head>
@@ -137,16 +137,16 @@
 								</div>
 								<div class="form-check">
 									<input class="form-check-input" type="radio"
-										required="required" name="role" id="job" value="2"> <label
+										required="required" name="role" id="job" value="2" onclick="toggleDropdown(false)"> <label
 										class="form-check-label" for="Jobseeker">Jobseeker</label>
 								</div>
 								<div class="form-group">
-									<label for="username">Username:</label> <input type="text"
+									<label for="username">Username:</label> <input required="required" type="number"
 										class="form-control" id="username"
 										placeholder="Enter your aadhar uid" name="uid">
 								</div>
 								<div class="form-group">
-									<label for="password">Password:</label> <input type="password"
+									<label for="password">Password:</label> <input required="required" type="password"
 										class="form-control" id="password"
 										placeholder="Enter your password" name="password">
 								</div>

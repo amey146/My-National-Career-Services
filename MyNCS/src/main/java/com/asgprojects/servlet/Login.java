@@ -27,9 +27,7 @@ public class Login extends HttpServlet {
         }
         else if(role == 1) {
         	user = UserSuper.getRecordById(Long.parseLong(userId));
-        	System.out.println(user.getEmpIdForSUser());
-        	System.out.println(empid);
-        	if(!(empid.equals(user.getEmpIdForSUser()))) {
+        	if(!(user==null || empid.equals(user.getEmpIdForSUser()))) {
         		 request.setAttribute("errorMessage", "Invalid employeer");
                  request.getRequestDispatcher("error.jsp").forward(request, response);
         	}

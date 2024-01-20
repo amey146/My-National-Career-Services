@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,8 @@ import com.asgprojects.bean.Job;
  */
 //@WebServlet("/JobSearch")
 public class JobSearch extends HttpServlet {
-
+	
+	public List<Job> searchResults;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -104,35 +106,33 @@ public class JobSearch extends HttpServlet {
 					+ ") AS combined_jobs;";
 		}
 		// Print the final query
-		System.out.println(query);
-		request.setAttribute("searchQuery", query);
-		request.getRequestDispatcher("job-list.jsp").forward(request, response);
-
-		// ... (Database connection and query execution)
+		//System.out.println(query);
+		
+		// (Database connection and query execution)
 		Connection con = null;
 		PreparedStatement statement = null;
 		ResultSet results = null;
 		try {
 
 			con = DatabaseConnection.getConnection();
+			
+			//Fire the query
 			statement = con.prepareStatement(query);
 			results = statement.executeQuery();
-
-			PrintWriter out = response.getWriter();
-			out.println("<html><head>");
-			out.println("<link href='css/displayjobstyle.css' rel='stylesheet'>");
-
-			List<Job> searchResults = new ArrayList<>();
+			
+			//Store the results into an arraylist
+			searchResults = new ArrayList<>();
 			while (results.next()) {
 				searchResults.add(new Job(results.getInt("jobId"), results.getInt("jobSalary"),
 						results.getInt("jobExp"), results.getString("jobTitle"), results.getString("jobDesc"),
 						results.getString("jobState"), results.getString("jobDistrict"), results.getString("jobCity"),
 						results.getString("jobSector"), results.getString("jobFunction")));
 			}
-
-			results.close();
-			statement.close();
-			con.close();
+			
+			//Dispatch that object to job-list.jsp 
+			 request.setAttribute("jobObject", searchResults); 
+		     RequestDispatcher dispatcher = request.getRequestDispatcher("/job-list.jsp");
+		     dispatcher.forward(request, response);
 		} catch (Exception e) {
 			System.err.println(e);
 		}

@@ -1,3 +1,4 @@
+<%@page import="com.asgprojects.servlet.JobSearch"%>
 <%@page
 	import="com.asgprojects.dao.*,com.asgprojects.bean.*,java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -11,6 +12,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
+
+
 
 <!-- Favicon -->
 <link href="img/favicon.ico" rel="icon">
@@ -38,8 +41,24 @@
 <!-- Customized Bootstrap Stylesheet -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
+
 <!-- Template Stylesheet -->
 <link href="css/style.css" rel="stylesheet">
+
+
+<!-- Page Specific -->
+
+    <style>
+        #cityDropdown {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleDropdown(showDropdown) {
+            var dropdown = document.getElementById("cityDropdown");
+            dropdown.style.display = showDropdown ? "block" : "none";
+        }
+    </script>
 </head>
 
 <body>
@@ -120,101 +139,246 @@
 		<!-- Header End -->
 
 		<%
-		List<Job> list = Job_Dao.getAllRecords();
+		List<Job> list = (List<Job>) request.getAttribute("jobObject");
 		request.setAttribute("list", list);
 		%>
 
-		<table border="1" width="90%">
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-			</tr>
-			<c:forEach items="${list}" var="j">
-				<tr>
-					<td>${j.getJobId()}</td>
-					<td>${j.getJobTitle()}</td>
-				</tr>
-			</c:forEach>
-		</table>
 
+		<div class="row g-0 text-center">
+			<div class="col-sm-6 col-md-9">
+				<!-- Jobs Start -->
+				<div class="container-xxl py-5">
+					<div class="container">
+						<h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job
+							Listing</h1>
+						<div class="tab-class text-center wow fadeInUp"
+							data-wow-delay="0.3s">
+							<div class="tab-content">
+								<div id="tab-1" class="tab-pane fade show p-0 active">
 
-		<!-- Jobs Start -->
-		<div class="container-xxl py-5">
-			<div class="container">
-				<h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job
-					Listing</h1>
-				<div class="tab-class text-center wow fadeInUp"
-					data-wow-delay="0.3s">
-					<div class="tab-content">
-						<div id="tab-1" class="tab-pane fade show p-0 active">
-							<div class="job-item p-4 mb-4">
-								<div class="row g-4">
-									<div class="col-sm-12 col-md-8 d-flex align-items-center">
-										<img class="flex-shrink-0 img-fluid border rounded"
-											src="img/com-logo-1.jpg" alt=""
-											style="width: 80px; height: 80px;">
-										<div class="text-start ps-4">
-											<h5 class="mb-3">Software Engineer</h5>
-											<span class="text-truncate me-3"><i
-												class="fa fa-map-marker-alt text-primary me-2"></i>New York,
-												USA</span> <span class="text-truncate me-3"><i
-												class="far fa-clock text-primary me-2"></i>Full Time</span> <span
-												class="text-truncate me-0"><i
-												class="far fa-money-bill-alt text-primary me-2"></i>$123 -
-												$456</span>
+									<c:forEach items="${list}" var="j">
+										<div class="job-item p-4 mb-4">
+											<div class="row g-4">
+												<div class="col-sm-12 col-md-8 d-flex align-items-center">
+													<div class="flex-shrink-0 img-fluid border rounded"
+														style="width: 80px; height: 80px;"></div>
+													<div class="text-start ps-4">
+														<h5 class="mb-3">${j.getJobTitle()}</h5>
+														<span class="text-truncate me-3"><i
+															class="fa fa-map-marker-alt text-primary me-2"></i>${j.getJobCity()}</span>
+														<span class="text-truncate me-3"><i
+															class="far fa-clock text-primary me-2"></i>Full Time</span> <span
+															class="text-truncate me-0"><i
+															class="far fa-money-bill-alt text-primary me-2"></i>${j.getJobSalary()}</span>
+													</div>
+												</div>
+												<div
+													class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+													<div class="d-flex mb-3">
+														<a class="btn btn-light btn-square me-3" href=""><i
+															class="far fa-heart text-primary"></i></a> <a
+															class="btn btn-primary" href="">Apply Now</a>
+													</div>
+													<small class="text-truncate"><i
+														class="far fa-calendar-alt text-primary me-2"></i>Date
+														Line: 01 Jan, 2045</small>
+												</div>
+											</div>
 										</div>
-									</div>
-									<div
-										class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-										<div class="d-flex mb-3">
-											<a class="btn btn-light btn-square me-3" href=""><i
-												class="far fa-heart text-primary"></i></a> <a
-												class="btn btn-primary" href="">Apply Now</a>
-										</div>
-										<small class="text-truncate"><i
-											class="far fa-calendar-alt text-primary me-2"></i>Date Line:
-											01 Jan, 2045</small>
-									</div>
+									</c:forEach>
+									<a class="btn btn-primary py-3 px-5"
+										href="/MyNCS/job-search.jsp">Back to search</a>
 								</div>
 							</div>
-							<div class="job-item p-4 mb-4">
-								<div class="row g-4">
-									<div class="col-sm-12 col-md-8 d-flex align-items-center">
-										<img class="flex-shrink-0 img-fluid border rounded"
-											src="img/com-logo-2.jpg" alt=""
-											style="width: 80px; height: 80px;">
-										<div class="text-start ps-4">
-											<h5 class="mb-3">Marketing Manager</h5>
-											<span class="text-truncate me-3"><i
-												class="fa fa-map-marker-alt text-primary me-2"></i>New York,
-												USA</span> <span class="text-truncate me-3"><i
-												class="far fa-clock text-primary me-2"></i>Full Time</span> <span
-												class="text-truncate me-0"><i
-												class="far fa-money-bill-alt text-primary me-2"></i>$123 -
-												$456</span>
-										</div>
-									</div>
-									<div
-										class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-										<div class="d-flex mb-3">
-											<a class="btn btn-light btn-square me-3" href=""><i
-												class="far fa-heart text-primary"></i></a> <a
-												class="btn btn-primary" href="">Apply Now</a>
-										</div>
-										<small class="text-truncate"><i
-											class="far fa-calendar-alt text-primary me-2"></i>Date Line:
-											01 Jan, 2045</small>
-									</div>
-								</div>
-							</div>
-							<a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
 						</div>
 					</div>
 				</div>
+				<!-- Jobs End -->
+			</div>
+			<div class="col-6 col-md-3" style="border: 1px solid black">
+				<!-- Form Starts -->
+
+				<form action="JobSearch" class="p-5">
+
+					<label class="col-sm-2 col-form-label" for="keywords">Keywords</label>
+
+					<input class="form-control" type="text" name="keywords" id=""
+						placeholder="ex: Java;Data Entry;Accounts;Sales etc">
+					<p class="form-text">Use ; (no-space) to search for multiple
+						keywords</p>
+
+
+					<fieldset class="row mb-3">
+						<legend class="col-form-label col-sm-2 pt-0">Location</legend>
+						<div class="col-sm-10">
+
+							<input class="form-check-input" type="radio" name="location"
+								id="allIndia" onclick="toggleDropdown(false)" checked="checked">
+							<label class="form-check-label" for="allIndia">All India</label>
+
+
+							<input class="form-check-input" type="radio" name="location"
+								value="states" id="selectLocation"
+								onclick="toggleDropdown(true)"> <label
+								class="form-check-label" for="selectLocation">Select
+								Location</label>
+
+							<!-- Chainselect -->
+							<div id="cityDropdown">
+								<label class="form-label" for="cities">Choose a state:</label> <select
+									class="form-select" aria-label="Default select example"
+									name="state">
+									<option value="AndhraPradesh">Andhra Pradesh</option>
+									<option value="ArunachalPradesh">Arunachal Pradesh</option>
+									<option value="Assam">Assam</option>
+									<option value="Bihar">Bihar</option>
+									<option value="Chhattisgarh">Chhattisgarh</option>
+									<option value="Goa">Goa</option>
+									<option value="Gujarat">Gujarat</option>
+									<option value="Haryana">Haryana</option>
+									<option value="HimachalPradesh">Himachal Pradesh</option>
+									<option value="Jharkhand">Jharkhand</option>
+									<option value="Karnataka">Karnataka</option>
+									<option value="Kerala">Kerala</option>
+									<option value="MadhyaPradesh">Madhya Pradesh</option>
+									<option value="Maharashtra">Maharashtra</option>
+									<option value="Manipur">Manipur</option>
+									<option value="Meghalaya">Meghalaya</option>
+									<option value="Mizoram">Mizoram</option>
+									<option value="Nagaland">Nagaland</option>
+									<option value="Odisha">Odisha</option>
+									<option value="Punjab">Punjab</option>
+									<option value="Rajasthan">Rajasthan</option>
+									<option value="Sikkim">Sikkim</option>
+									<option value="TamilNadu">Tamil Nadu</option>
+									<option value="Telangana">Telangana</option>
+									<option value="Tripura">Tripura</option>
+									<option value="UttarPradesh">Uttar Pradesh</option>
+									<option value="Uttarakhand">Uttarakhand</option>
+									<option value="WestBengal">West Bengal</option>
+									<option value="AndamanNicobar">Andaman and Nicobar
+										Islands</option>
+									<option value="Chandigarh">Chandigarh</option>
+									<option value="DadraNagarHaveli">Dadra and Nagar
+										Haveli</option>
+									<option value="DamanDiu">Daman and Diu</option>
+									<option value="Delhi">Delhi</option>
+									<option value="Lakshadweep">Lakshadweep</option>
+									<option value="Puducherry">Puducherry</option>
+								</select>
+							</div>
+							<!-- Ends Chainselect -->
+						</div>
+					</fieldset>
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="org">Organisation
+							Type</label>
+						<div class="col-sm-10">
+							<select name="job_org" id="org" class="form-select"
+								aria-label="Default select example">
+								<option value="all">All Jobs</option>
+								<option value="private">Private Sector</option>
+								<option value="government">Government Sector</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="sector">Sector</label>
+						<div class="col-sm-10">
+							<select size="4" multiple="multiple" name="sector"
+								class="form-select" multiple
+								aria-label="multiple select example">
+								<option value="10">Hotels, Food Service and Catering</option>
+								<option value="21">International Organizations</option>
+								<option value="20">Household and Domestic Work</option>
+								<option value="15">Operations and Support</option>
+								<option value="2">Agriculture and Related</option>
+								<option value="19">Arts and Entertainment</option>
+								<option value="7">Civil and Construction Works</option>
+								<option value="17">Education</option>
+								<option value="5">Power and Energy</option>
+								<option value="12">Finance and Insurance</option>
+								<option value="18">Health</option>
+								<option value="11">IT and Communication</option>
+								<option value="4">Manufacturing</option>
+								<option value="3">Mining And Quarrying</option>
+								<option value="1">Other Service Activities</option>
+								<option value="14">Specialized Professional Services</option>
+								<option value="16">Public Administration and Defense</option>
+								<option value="13">Real Estate Activities</option>
+								<option value="9">Transportation and Storage</option>
+								<option value="6">Water Supply, Sewerage and Waste
+									Management</option>
+								<option value="8">Wholesale and Retail</option>
+							</select>
+							<p class="form-text">Use CRTL + mouse click to multi-select
+								options</p>
+						</div>
+					</div>
+
+
+
+
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="functionalarea">Functional
+							Area</label>
+						<div class="col-sm-10">
+							<select name="functionalarea" class="form-select"
+								aria-label="Default select example">
+								<option selected="selected" value="all">Select a
+									functional area</option>
+								<option value="4">Administration/Back Office Activities</option>
+								<option value="9">Analytics &amp; Business Intelligence</option>
+								<option value="8">Customer Care Service</option>
+								<option value="3">Finance,Insurance and Accounting
+									Services</option>
+								<option value="1">Human Resources</option>
+								<option value="5">Information Technology</option>
+								<option value="34">Internal security</option>
+								<option value="6">Legal</option>
+								<option value="7">Logistics and Supply chain</option>
+								<option value="2">Marketing &amp; Sales</option>
+								<option value="10">Operations and Maintenance</option>
+								<option value="36">R&amp;D</option>
+								<option value="58">Telecom/ISP</option>
+							</select>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="exp">Total
+							Work Experience (years)</label>
+						<div class="col-sm-10">
+							<select name="exp" id="expSelect" class="form-select"
+								aria-label="Default select example">
+								<!-- Options will be added dynamically using JavaScript -->
+							</select>
+						</div>
+					</div>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						<button type="reset" class="btn btn-outline-warning btn-lg">Reset</button>
+						<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+					</div>
+
+					<script>
+						// Get the select element
+						var expSelect = document.getElementById("expSelect");
+
+						// Populate options from 0 to 45 years
+						for (var i = 0; i <= 45; i++) {
+							var option = document.createElement("option");
+							option.value = i;
+							option.text = i;
+							expSelect.add(option);
+						}
+					</script>
+
+				</form>
+
+				<!-- Form Ends -->
 			</div>
 		</div>
-		<!-- Jobs End -->
-
 
 		<!-- Footer Start -->
 		<div
